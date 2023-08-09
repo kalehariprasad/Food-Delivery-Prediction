@@ -1,3 +1,4 @@
+#data injection
 connstant file ->confiuration file ->data injection
 
 ->we are creating varibales for constant file
@@ -5,3 +6,14 @@ connstant file ->confiuration file ->data injection
 for configuration of file like which has to store in which location
 ->and in data injection file we are reading data from configuration output file and injecting 
 the data into Artifacts folder and sub foleders
+
+#data transormation
+connstant file ->confiuration file ->feature engineering
+-> agin we are going to define feature engineering varibales
+1.we are trying create two folders in Artifacts folders named Data transformation & preprocessor
+2.in data transoformation folder again one folder named Transformation with  transformed_train.csv & transformed_test.csv
+3.And in preprocessor folder preprocessor.pkl,feature engineering.pkl files
+-> and connect with configuration flie 
+-> and perform feature engineering if  require we will create a helper code in utils.py
+
+

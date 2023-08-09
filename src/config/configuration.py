@@ -1,6 +1,6 @@
 from src.constants import * # importing all from constants folder 
 import os,sys
-
+# Data injection steps
 ROOT_DIR=ROOT_DIR_KEY
 logging.info("joining root dirrctory path to dateset director ")
 DATASET_PATH=os.path.join(ROOT_DIR,DATA_DIR,DATA_DIR_KEY)
@@ -12,3 +12,14 @@ logging.info('joing train file path compleeted')
 TEST_FILE_PATH=os.path.join(ROOT_DIR,ARTIFACTS_DIR_KEY,
                                 DATA_INJGECTION_INGESTED_DATA_DIR_KEY,CURRENT_TIME_STAMP,TEST_DATA_DIR_KEY)
 logging.info("joining test file path compleeted")
+
+#data Transformation steps
+PREPROSECCING_OBJ_FILE=os.path.join(ROOT_DIR,ARTIFACTS_DIR_KEY,DATA_TRANSFORMATION_ARTICAT_FOLDER,DATA_PROCESSING_FPLDER,
+                                    DATA_PREPEOCESSING_OBJECT)
+FEATURE_ENGINEERING_FILE_PATH=os.path.join(ROOT_DIR,ARTIFACTS_DIR_KEY,DATA_TRANSFORMATION_ARTICAT_FOLDER,DATA_PROCESSING_FPLDER,
+                                    FEATURE_ENGINEERING_OBJECT)
+TRANSFORMED_TRAIN_FILE_PATH=os.path.join(ROOT_DIR,ARTIFACTS_DIR_KEY,DATA_TRANSFORMATION_ARTICAT_FOLDER,DATA_TRANSFORMATION_FOLDER,
+                                   TRANSFORMATION_TRAIN_FILE)
+TRANSFORMED_TEST_FILE_PATH=os.path.join(ROOT_DIR,ARTIFACTS_DIR_KEY,DATA_TRANSFORMATION_ARTICAT_FOLDER,DATA_TRANSFORMATION_FOLDER,
+                                   TRANSFORMATION_TEST_FILE)
+
