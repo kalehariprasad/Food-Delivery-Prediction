@@ -1,0 +1,7 @@
+connstant file ->confiuration file ->data injection
+
+->we are creating varibales for constant file
+->after creating constant file we are using varibales created in constant file in configuration file
+for configuration of file like which has to store in which location
+->and in data injection file we are reading data from configuration output file and injecting 
+the data into Artifacts folder and sub foleders
