@@ -1,5 +1,6 @@
-from src.components import *
+
 from src.config.configuration import *
+from src.components import data_transformation
 import os,sys
 import pandas as pd
 import numpy as np
@@ -7,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from src.logger import logging
 from src.exception import CustomeExeption
 from dataclasses import dataclass
+
 logging.info("creating a CLASS call DataIngectionConfig")
 @dataclass
 class DataIngectionConfig:
@@ -48,4 +50,4 @@ class DataIngection:
 if __name__ =="__main__":
     obj=DataIngection()
     obj.Intiate_data_ingection()
-
+    data_transformation_obj=D
