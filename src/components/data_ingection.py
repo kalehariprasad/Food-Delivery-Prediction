@@ -1,6 +1,6 @@
 
 from src.config.configuration import *
-from src.components import data_transformation
+from src.components.data_transformation import DataTransformation,featureengineering
 import os,sys
 import pandas as pd
 import numpy as np
@@ -49,5 +49,7 @@ class DataIngection:
         
 if __name__ =="__main__":
     obj=DataIngection()
-    obj.Intiate_data_ingection()
-    data_transformation_obj=D
+    train_path, test_path=obj.Intiate_data_ingection()
+    feature_engineering=featureengineering()
+    data_transformation_obj=DataTransformation()
+    train_arry, test_arry, processed_obj_file_path = data_transformation_obj.intiate_data_transformation(train_path, test_path)
