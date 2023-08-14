@@ -78,11 +78,13 @@ class DataTransformation:
                 ('scaler', StandardScaler(with_mean=False))
             ])
              # ordinal Pipeline
-            ordinal_pipeline = Pipeline(steps = [
-                ('impute', SimpleImputer(strategy = 'most_frequent')),
-                ('ordinal', OrdinalEncoder(categories=['Road_traffic_density', 'Weather_conditions'])),
-                ('scaler', StandardScaler(with_mean=False))
+            ordinal_pipeline = Pipeline(steps=[
+                    ('impute', SimpleImputer(strategy='most_frequent')),
+                    ('ordinal', OrdinalEncoder(categories=[road_traffic_density, weather_condition], handle_unknown='use_encoded_value', unknown_value=-1)),
+                    ('scaler', StandardScaler(with_mean=False))
             ])
+
+            
             preprocssor = ColumnTransformer([
                 ('numerical_pipeline', numerical_pipeline,numerical_column ),
                 ('categorical_pipeline', categorical_pipeline,categorical_columns ),
@@ -98,7 +100,8 @@ class DataTransformation:
     def getfeature_engineering_object(self):
         try:
             feature_engineering_object=Pipeline(
-                steps=[("feature engineering",featureengineering())]
+                steps=[("feature engineering",featureengineering()),
+                ]
             )
             return feature_engineering_object
         except Exception as e:
@@ -116,14 +119,15 @@ class DataTransformation:
 
             preprocessing_object=self.get_data_transformation_object()
 
+
             target_column="Time_taken (min)"
             X_train=train_feature_engineering.drop(columns=target_column,axis=1)
             y_train=train_feature_engineering[target_column]
             X_test=test_featuere_engineering.drop(columns=target_column,axis=1)
             y_test=test_featuere_engineering[target_column]
 
-            X_train=fe_obj.fit_transform(train_feature_engineering)
-            X_test=fe_obj.transform(test_featuere_engineering)
+            X_train=preprocessing_object.fit_transform(train_feature_engineering)
+            X_test=preprocessing_object.transform(test_featuere_engineering)
 
             train_arry = np.c_[X_train, y_train]  # Corrected
             test_arry = np.c_[X_test, y_test]
@@ -136,7 +140,7 @@ class DataTransformation:
             df_test.to_csv(self.data_transformatio_config.transformed_test_file,index=False,header=True)
             save_obj(file_path=self.data_transformatio_config.featureengineering_obj_path,obj=fe_obj)
             save_obj(file_path=self.data_transformatio_config.processed_obj_file_path,obj=preprocessing_object)
-
+            logging.info(f"train array first 5 rows are{train_arry[:5]} and test array first 5 rows are {test_arry[:5]} ")
             return (train_arry,test_arry,self.data_transformatio_config.processed_obj_file_path)
 
 

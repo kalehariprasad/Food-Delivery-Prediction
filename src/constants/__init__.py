@@ -28,3 +28,6 @@ FEATURE_ENGINEERING_OBJECT="feature engineering.pkl"
 DATA_TRANSFORMATION_FOLDER="Transformation"
 TRANSFORMATION_TRAIN_FILE="transformed_train.csv"
 TRANSFORMATION_TEST_FILE="transformed_test.csv"
+#model trainer variable
+MODEL_TRAINER_FOLDER="Model trainer"
+MODEL_OBJECT="Model.pkl"
