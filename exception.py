@@ -11,8 +11,6 @@ def index():
     except Exception as e:
         ML = CustomeExeption(e,sys)
         logging.info(ML.error_message)
-    
-
         logging.info("We are testing our logging file")
         return "Welcome to my flask application"
 

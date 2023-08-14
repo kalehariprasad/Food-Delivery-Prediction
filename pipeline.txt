@@ -1,33 +1,29 @@
-
 Data Injection Pipeline
 =======================
 
-Overview
---------
+**Overview:**
 
 The data injection pipeline involves the extraction and injection of raw data into appropriate storage locations, guided by constants and configuration settings.
 
-Steps
------
+**Steps:**
 
-Constant File (constants.py):
+**Constant File (constants.py):**
 
 Define variables that hold key paths and settings for the data injection process.
 
-Configuration File (configuration.py):
+**Configuration File (configuration.py):**
 
 Utilize the constants defined in the constant file to specify file paths and directories for storing the ingested data.
 
-Data Injection (data_injection.py):
+**Data Injection (data_injection.py):**
 
-Create an instance of the configuration object to access paths and directories.
-Read the raw data from the specified location (e.g., CSV file) using the pandas library.
-Store the raw data temporarily in a dedicated folder within the Artifacts directory.
-Split the raw data into training and testing datasets using techniques like train-test split.
-Save the training and testing datasets as CSV files in the ingested data directory.
+1. Create an instance of the configuration object to access paths and directories.
+2. Read the raw data from the specified location (e.g., CSV file) using the pandas library.
+3. Store the raw data temporarily in a dedicated folder within the Artifacts directory.
+4. Split the raw data into training and testing datasets using techniques like train-test split.
+5. Save the training and testing datasets as CSV files in the ingested data directory.
 
-Key Points
-----------
+**Key Points:**
 
 - The constant file contains essential variables for paths and settings.
 - The configuration file uses these constants to create a structured configuration object.
@@ -37,39 +33,76 @@ Key Points
 Data Transformation Pipeline
 ===========================
 
-Overview
---------
+**Overview:**
 
 The data transformation pipeline encompasses various stages of data preprocessing, including feature engineering, normalization, and more. This process prepares the raw data for use in machine learning models.
 
-Steps
------
+**Steps:**
 
-Constant File (constants.py):
+**Constant File (constants.py):**
 
 Define variables that hold key paths and settings for the data transformation process.
 
-Configuration File (configuration.py):
+**Configuration File (configuration.py):**
 
 Utilize the constants defined in the constant file to specify file paths and directories for storing processed data and artifacts.
 
-Feature Engineering (feature_engineering.py):
+**Feature Engineering (feature_engineering.py):**
 
-Create custom transformers to perform feature engineering tasks on the raw data.
-Transform the data by applying the custom transformers, generating new features as needed.
-Store the transformed data temporarily in the Transformation folder within the Data Transformation Artifacts directory.
-Preprocessing (data_transformation.py):
+1. Create custom transformers to perform feature engineering tasks on the raw data.
+2. Transform the data by applying the custom transformers, generating new features as needed.
+3. Store the transformed data temporarily in the Transformation folder within the Data Transformation Artifacts directory.
 
-Create preprocessing pipelines for numerical, categorical, and ordinal data.
-Utilize the ColumnTransformer to apply the appropriate preprocessing steps to different feature groups.
-Apply preprocessing steps to both training and testing datasets, maintaining consistency.
-Save preprocessing objects and feature engineering objects using the save_obj function from the utils module.
+**Preprocessing (data_transformation.py):**
 
-Key Points
-----------
+1. Create preprocessing pipelines for numerical, categorical, and ordinal data.
+2. Utilize the ColumnTransformer to apply the appropriate preprocessing steps to different feature groups.
+3. Apply preprocessing steps to both training and testing datasets, maintaining consistency.
+4. Save preprocessing objects and feature engineering objects using the save_obj function from the utils module.
+
+**Key Points:**
 
 - Constants are defined for specifying paths and settings throughout the pipeline.
 - Configuration settings use the constants to organize data storage locations.
 - Feature engineering involves creating custom transformers for data enrichment.
 - Preprocessing pipelines ensure the data is appropriately prepared for machine learning.
 - Processed data and artifacts are saved in the designated folders within the Artifacts directory.
+
+
+Model Training Pipeline
+=======================
+
+**Overview:**
+
+The model training pipeline involves training machine learning models using the preprocessed data generated from the data transformation pipeline. This process includes configuring model parameters, evaluating model performance, and selecting the best-performing model.
+
+**Steps:**
+
+**Constant File (constants.py):**
+
+Define variables that hold key paths, settings, and model-related parameters for the model training process.
+
+**Configuration File (configuration.py):**
+
+Utilize the constants defined in the constant file to specify file paths, directories, and model parameters.
+
+**Model Training (model_trainer.py):**
+
+1. Load the preprocessed training and testing datasets.
+2. Split the datasets into feature vectors and target variables.
+3. Create a dictionary of machine learning models with their corresponding instances and hyperparameters.
+4. For each model in the dictionary:
+   - Fit the model to the training data.
+   - Predict target values using the test data.
+   - Evaluate the model's performance using metrics such as R-squared.
+5. Identify the best-performing model based on the evaluation metrics.
+6. Retrieve the name of the best model and its corresponding R-squared score.
+7. Save the best model for future use.
+
+**Key Points:**
+
+- Constants hold essential paths, settings, and model parameters.
+- Configuration settings use the constants to organize paths and parameter values.
+- Model training includes fitting, predicting, and evaluating machine learning models.
+- The best-performing model is identified based on evaluation metrics.
+- The selected model is saved for later use in the prediction phase.
