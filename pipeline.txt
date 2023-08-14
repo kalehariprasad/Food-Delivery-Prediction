@@ -1,19 +1,75 @@
-#data injection
-connstant file ->confiuration file ->data injection
 
-->we are creating varibales for constant file
-->after creating constant file we are using varibales created in constant file in configuration file
-for configuration of file like which has to store in which location
-->and in data injection file we are reading data from configuration output file and injecting 
-the data into Artifacts folder and sub foleders
+Data Injection Pipeline
+=======================
 
-#data transormation
-connstant file ->confiuration file ->feature engineering
--> agin we are going to define feature engineering varibales
-1.we are trying create two folders in Artifacts folders named Data transformation & preprocessor
-2.in data transoformation folder again one folder named Transformation with  transformed_train.csv & transformed_test.csv
-3.And in preprocessor folder preprocessor.pkl,feature engineering.pkl files
--> and connect with configuration flie 
--> and perform feature engineering if  require we will create a helper code in utils.py
+Overview
+--------
 
+The data injection pipeline involves the extraction and injection of raw data into appropriate storage locations, guided by constants and configuration settings.
 
+Steps
+-----
+
+Constant File (constants.py):
+
+Define variables that hold key paths and settings for the data injection process.
+
+Configuration File (configuration.py):
+
+Utilize the constants defined in the constant file to specify file paths and directories for storing the ingested data.
+
+Data Injection (data_injection.py):
+
+Create an instance of the configuration object to access paths and directories.
+Read the raw data from the specified location (e.g., CSV file) using the pandas library.
+Store the raw data temporarily in a dedicated folder within the Artifacts directory.
+Split the raw data into training and testing datasets using techniques like train-test split.
+Save the training and testing datasets as CSV files in the ingested data directory.
+
+Key Points
+----------
+
+- The constant file contains essential variables for paths and settings.
+- The configuration file uses these constants to create a structured configuration object.
+- Data injection involves reading raw data, storing it temporarily, and generating training and testing datasets.
+- Ingested data is saved in a designated location within the Artifacts directory.
+
+Data Transformation Pipeline
+===========================
+
+Overview
+--------
+
+The data transformation pipeline encompasses various stages of data preprocessing, including feature engineering, normalization, and more. This process prepares the raw data for use in machine learning models.
+
+Steps
+-----
+
+Constant File (constants.py):
+
+Define variables that hold key paths and settings for the data transformation process.
+
+Configuration File (configuration.py):
+
+Utilize the constants defined in the constant file to specify file paths and directories for storing processed data and artifacts.
+
+Feature Engineering (feature_engineering.py):
+
+Create custom transformers to perform feature engineering tasks on the raw data.
+Transform the data by applying the custom transformers, generating new features as needed.
+Store the transformed data temporarily in the Transformation folder within the Data Transformation Artifacts directory.
+Preprocessing (data_transformation.py):
+
+Create preprocessing pipelines for numerical, categorical, and ordinal data.
+Utilize the ColumnTransformer to apply the appropriate preprocessing steps to different feature groups.
+Apply preprocessing steps to both training and testing datasets, maintaining consistency.
+Save preprocessing objects and feature engineering objects using the save_obj function from the utils module.
+
+Key Points
+----------
+
+- Constants are defined for specifying paths and settings throughout the pipeline.
+- Configuration settings use the constants to organize data storage locations.
+- Feature engineering involves creating custom transformers for data enrichment.
+- Preprocessing pipelines ensure the data is appropriately prepared for machine learning.
+- Processed data and artifacts are saved in the designated folders within the Artifacts directory.
