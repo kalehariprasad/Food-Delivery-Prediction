@@ -31,3 +31,5 @@ TRANSFORMATION_TEST_FILE="transformed_test.csv"
 #model trainer variable
 MODEL_TRAINER_FOLDER="Model trainer"
 MODEL_OBJECT="Model.pkl"
+
+

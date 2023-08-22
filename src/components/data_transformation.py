@@ -3,7 +3,7 @@ from src.constants import * # importing all variables from constant file
 from src.config.configuration import * # importing all from 
 from src.logger import logging
 from src.exception import CustomeExeption
-from src.utils import save_obj
+from src.utils import save_obj,get_unique
 from dataclasses import dataclass
 import pandas as pd
 import numpy as np
@@ -21,7 +21,7 @@ class featureengineering(BaseEstimator, TransformerMixin):
         p = np.pi / 180
         a = 0.5 - np.cos((df[lat2] - df[lat1]) * p) / 2 + np.cos(df[lat1] * p) * np.cos(df[lat2] * p) * (1 - np.cos((df[long2] - df[long1]) * p)) / 2
         df['distance'] = 12734 * np.arccos(np.sort(a))
-        logging.info(f"columns are {df.columns}")
+        logging.info(f"first five rows are {df.head()}")
         return df
     
     def transform(self, df):
@@ -31,7 +31,8 @@ class featureengineering(BaseEstimator, TransformerMixin):
             self.diastance_numpy(df, 'Restaurant_latitude', 'Restaurant_longitude', 'Delivery_location_latitude', 'Delivery_location_longitude')
             df=df.drop(['Delivery_person_ID', 'Restaurant_latitude', 'Restaurant_longitude', 'Delivery_location_latitude', 'Delivery_location_longitude', 'Order_Date', 'Time_Orderd', 'Time_Order_picked'], axis=1)
             logging.info('dropped columns from data frame and created a new column called distance')
-            logging.info(f"columns after dropping unnecessary columns are {df.columns}")
+            logging.info(f"first five rows after dropping unnecessary columns are {df.head()} ")
+          
             return df   
         except Exception as e:
             raise CustomeExeption(e,sys)
