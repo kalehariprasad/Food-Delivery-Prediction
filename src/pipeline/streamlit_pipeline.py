@@ -80,9 +80,8 @@ class Streamlit:
             predict_button = st.button("Predict Delivery Time")
             pred_pipe=PredictionPipeline()
             if predict_button:
-                input_data = custom_data.get_as_DataFrame()
-                pred=pred_pipe.predict(features=input_data)
-                st.text(f'Estimated time of delivery is {pred} in minutes')
+        
+                st.text(f'Estimated time of delivery is in minutes')
 
 
             
