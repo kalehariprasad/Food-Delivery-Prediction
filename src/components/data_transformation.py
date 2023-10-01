@@ -21,7 +21,7 @@ class featureengineering(BaseEstimator, TransformerMixin):
         p = np.pi / 180
         a = 0.5 - np.cos((df[lat2] - df[lat1]) * p) / 2 + np.cos(df[lat1] * p) * np.cos(df[lat2] * p) * (1 - np.cos((df[long2] - df[long1]) * p)) / 2
         df['distance'] = 12734 * np.arccos(np.sort(a))
-        logging.info(f"first five rows are {df.head()}")
+        
         return df
     
     def transform(self, df):
@@ -31,7 +31,7 @@ class featureengineering(BaseEstimator, TransformerMixin):
             self.diastance_numpy(df, 'Restaurant_latitude', 'Restaurant_longitude', 'Delivery_location_latitude', 'Delivery_location_longitude')
             df=df.drop(['Delivery_person_ID', 'Restaurant_latitude', 'Restaurant_longitude', 'Delivery_location_latitude', 'Delivery_location_longitude', 'Order_Date', 'Time_Orderd', 'Time_Order_picked'], axis=1)
             logging.info('dropped columns from data frame and created a new column called distance')
-            logging.info(f"first five rows after dropping unnecessary columns are {df.head()} ")
+            
           
             return df   
         except Exception as e:
@@ -53,6 +53,8 @@ class featureengineering(BaseEstimator, TransformerMixin):
 class DataTransformationConfig():
     processed_obj_file_path=PREPROSECCING_OBJ_FILE
     featureengineering_obj_path=FEATURE_ENGINEERING_FILE_PATH
+    fe_train_path=FE_TRAIN_PATH
+    fe_test_path=FE_TEST_PATH
     transformed_train_file=TRANSFORMED_TRAIN_FILE_PATH
     transformed_test_file=TRANSFORMED_TEST_FILE_PATH
 
@@ -114,9 +116,13 @@ class DataTransformation:
             logging.info('obtaining feature enfineering object')
             fe_obj=self.getfeature_engineering_object()
             train_feature_engineering=fe_obj.fit_transform(train_df)
+            os.makedirs(os.path.dirname(self.data_transformatio_config.fe_train_path),exist_ok=True)
+            train_feature_engineering.to_csv(self.data_transformatio_config.fe_train_path,index=True)
+
             test_featuere_engineering=fe_obj.transform(test_df)
-            train_feature_engineering.to_csv("transformed_train.csv")
-            test_featuere_engineering.to_csv("transformed_test.csv")
+            os.makedirs(os.path.dirname(self.data_transformatio_config.fe_test_path),exist_ok=True)
+            test_featuere_engineering.to_csv(self.data_transformatio_config.fe_test_path,index=True)
+
 
             preprocessing_object=self.get_data_transformation_object()
 
@@ -130,7 +136,7 @@ class DataTransformation:
             X_train=preprocessing_object.fit_transform(train_feature_engineering)
             X_test=preprocessing_object.transform(test_featuere_engineering)
 
-            train_arry = np.c_[X_train, y_train]  # Corrected
+            train_arry = np.c_[X_train, y_train]  
             test_arry = np.c_[X_test, y_test]
             
             df_train=pd.DataFrame(train_arry)
@@ -141,7 +147,7 @@ class DataTransformation:
             df_test.to_csv(self.data_transformatio_config.transformed_test_file,index=False,header=True)
             save_obj(file_path=self.data_transformatio_config.featureengineering_obj_path,obj=fe_obj)
             save_obj(file_path=self.data_transformatio_config.processed_obj_file_path,obj=preprocessing_object)
-            logging.info(f"train array first 5 rows are{train_arry[:5]} and test array first 5 rows are {test_arry[:5]} ")
+           
             return (train_arry,test_arry,self.data_transformatio_config.processed_obj_file_path)
 
 

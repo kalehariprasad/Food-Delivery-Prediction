@@ -10,6 +10,7 @@ from src.logger import logging
 from src.exception import CustomeExeption
 from dataclasses import dataclass
 
+
 logging.info("creating a CLASS call DataIngectionConfig")
 @dataclass
 class DataIngectionConfig:

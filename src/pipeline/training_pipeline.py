@@ -21,6 +21,6 @@ class Train:
         model_trainer=ModelTrainer()
         r2_score_value=model_trainer.intiate_model_training(train_arry, test_arry)
         logging.info(f"model training compleete in traininig pipeline with r2 score of {r2_score_value}")
-        st.write(f'mode has trained wit r2 score of {r2_score_value}') 
+        st.write(f'mode has trained wit r2 score of {r2_score_value }') 
       
     

@@ -1,24 +1,31 @@
 import os,sys
-from src.constants import * # importing all variables from constant file
-from src.config.configuration import * # importing all from 
+from src.constants import * 
+from src.config.configuration import *
 from src.exception import CustomeExeption
 from src.logger import logging
+from dataclasses import dataclass
 from src.utils import load_model
 from src.pipeline.training_pipeline import Train
 import pandas as pd
 import streamlit as st
 
+@dataclass
+class predictpipelineConfig:
+     feature_engineering=FEATURE_ENGINEERING_OBJECT
+     preprocessor_path=PREPROSECCING_OBJ_FILE
+     model_path=MODEL_FILE_PATH
+
 
 class PredictionPipeline:
     def __init__(self):
-        pass
+        self.predictpipelineconfig=predictpipelineConfig()
 
     def predict(self,features):
         try:
-            preprocessor_path=PREPROSECCING_OBJ_FILE
-            model_path=MODEL_FILE_PATH
-            preprocessor=load_model(preprocessor_path)
-            model=load_model(model_path)
+            
+            preprocessor=load_model(self.predictpipelineconfig.preprocessor_path)
+
+            model=load_model(self.predictpipelineconfig.model_path)
             data_scaled=preprocessor.transform(features)
             pred =model.predict(data_scaled)
 
@@ -90,20 +97,30 @@ class CustomData:
                 raise CustomeExeption(e,sys)
 class Streamlit:
     def __init__(self):
-       pass
+       self.predictpipelineconfig=predictpipelineConfig()
 
-    def train():
+    def train(self):
         st.title('Zomato Delivery Prediction training stage')
         train=Train()
         train.main()
      
 
-    def batchprediction():
-        pass
+    def batchprediction(self):
+        st.title("batch  Delivery prediction ")
+        uploaded_file = st.file_uploader("Choose a file")
+        if uploaded_file is not None:
+            df = pd.read_csv(uploaded_file)
+            
+            preprocessor=load_model(self.predictpipelineconfig.preprocessor_path)
+            model=load_model(self.predictpipelineconfig.model_path)
+            
+            scaled_df=preprocessor.transform(df)
+            predictions=model.predict(scaled_df)
+            st.write(f'predictions are :{predictions}')
 
 
-    def single_prediction():
-            st.title("Zomato Delivery Prediction")
+    def single_prediction(self):
+            st.title(" single Delivery Prediction")
                
 
             delivery_person_age = st.number_input("Delivery Person Age:", min_value=0, value=25, step=1)
