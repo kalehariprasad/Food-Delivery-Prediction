@@ -109,10 +109,9 @@ class DataTransformation:
             return feature_engineering_object
         except Exception as e:
             raise CustomeExeption(e,sys)
-    def intiate_data_transformation(self,train_path,test_path):
+    def intiate_data_transformation(self,train_df,test_df):
         try:
-            train_df=pd.read_csv(train_path)
-            test_df=pd.read_csv(test_path)
+            
             logging.info('obtaining feature enfineering object')
             fe_obj=self.getfeature_engineering_object()
             train_feature_engineering=fe_obj.fit_transform(train_df)
@@ -148,7 +147,7 @@ class DataTransformation:
             save_obj(file_path=self.data_transformatio_config.featureengineering_obj_path,obj=fe_obj)
             save_obj(file_path=self.data_transformatio_config.processed_obj_file_path,obj=preprocessing_object)
            
-            return (train_arry,test_arry,self.data_transformatio_config.processed_obj_file_path)
+            return (train_arry,test_arry)
 
 
 

@@ -41,10 +41,8 @@ class DataIngection:
             logging.info("reading test data set complteeted")
             
             return (
-                self.data_ingection_config.train_data_path,
-                self.data_ingection_config.test_data_path
-                
-            )
+                  train_set,test_set
+                  )
 
         except Exception as e:
             raise CustomeExeption(e,sys)
@@ -52,8 +50,7 @@ class DataIngection:
 if __name__ =="__main__":
     obj=DataIngection()
     train_path, test_path=obj.Intiate_data_ingection()
-    feature_engineering=featureengineering()
-    data_transformation_obj=DataTransformation()
-    train_arry, test_arry, processed_obj_file_path = data_transformation_obj.intiate_data_transformation(train_path, test_path)
+    data_transformation=DataTransformation()
+    train_arry, test_arry,= data_transformation.intiate_data_transformation(train_path, test_path)
     model_trainer=ModelTrainer()
     model_trainer.intiate_model_training(train_arry, test_arry)
