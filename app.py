@@ -89,7 +89,7 @@ class Streamlit:
             if predict_button:
                     pred_fun=PredictionPipeline()
                     pre = pred_fun.predict(input_df)
-                    st.text(f'Estima ted time of delivery is in minutes : {pre[0]} minutes')
+                    st.text(f'Estimated time of delivery is in minutes : {pre[0]} minutes')
 
 
 nav_selection = st.sidebar.radio("Navigation", ["Main Page", "Train", "Batch Prediction", "Single Prediction"])
