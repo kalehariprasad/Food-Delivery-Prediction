@@ -19,7 +19,7 @@ install requirements with command - pip install -r requirements.txt
 ## streamlit web app
 
 
- link for stresamlit app - https://deliverytime.streamlit.app/
+ link for streamlit app - https://deliverytime.streamlit.app/
 
 
 
