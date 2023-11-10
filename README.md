@@ -21,8 +21,7 @@ install requirements with command - pip install -r requirements.txt
 
  link for stresamlit app - https://deliverytime.streamlit.app/
 
- and some of the picture how app look like
- ![image](https://github.com/kalehariprasad/ML-modular-coding-project/assets/106798714/01da4c90-3896-4a2e-9634-886969009501)
+
 
 
 
