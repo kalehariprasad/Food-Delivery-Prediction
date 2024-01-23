@@ -7,4 +7,7 @@ plotly
 folium
 scikit-learn
 xgboost
+dvc
+gdrive
+dvc[gdrive]
 #-e .

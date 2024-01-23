@@ -29,6 +29,7 @@ FE_FOLDER='FE Data'
 FE_TRAIN="FE_Train.csv"
 FE_TEST="FE_Test.csv"
 DATA_TRANSFORMATION_FOLDER="Transformation"
+TRANSFORMED_DATA_FOLDER="Transformed Data"
 TRANSFORMATION_TRAIN_FILE="transformed_train.csv"
 TRANSFORMATION_TEST_FILE="transformed_test.csv"
 #model trainer variable
