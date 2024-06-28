@@ -1,6 +1,6 @@
 pip==24.0
 pandas
-numpy
+numpy==1.20.3
 matplotlib
 seaborn 
 flask
