@@ -1,8 +1,8 @@
 pandas
 numpy==1.21.1
-scipy==1.7.0
+scipy==1.6.3
 matplotlib
-seaborn 
+seaborn
 flask
 plotly
 folium
@@ -11,4 +11,3 @@ xgboost
 dvc
 gdrive
 dvc[gdrive]
-#-e .
