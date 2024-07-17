@@ -1,4 +1,6 @@
 [core]
-    remote = delivery
+    remote = dvcstore
 ['remote "delivery"']
     url = ../1G8S31P2N-k0bgLTz56_KORzIOzus_qTk
+['remote "dvcstore"']
+    url = s3://dvc-bucket-2
