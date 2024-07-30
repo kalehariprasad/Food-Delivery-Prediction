@@ -4,6 +4,7 @@ scipy==1.6.3
 matplotlib
 seaborn
 flask
+streamlit
 plotly
 folium
 scikit-learn==1.3.0
